@@ -15,13 +15,15 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
 
-            @if (! Sentry::check()){
-            <li><a href="">Log In</a></li>
-            }
+            @if (! Sentry::check())
+            <li><a href="">Log In!</a></li>
+            
 
-            @else{
+            @else
             <li><a href="">Logout</a></li>
-            }
+            
+
+            @endif
           </ul>
         </div><!--/.nav-collapse -->
       </div>

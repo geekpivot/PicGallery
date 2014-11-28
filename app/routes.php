@@ -24,3 +24,8 @@ Route::get('file', function()
 	return 'Done';
 });
 
+
+Route::get('login', function()
+{
+	return View::make('sentry.login');
+});
