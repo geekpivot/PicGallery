@@ -45,7 +45,7 @@ class AuthController extends \BaseController {
 
 			if ( $user = Sentry::authenticate($credentials, false))
 			{
-				return Redirect::intended('profile')->withSuccess('You are now Logged in!');
+				return Redirect::intended('/')->withSuccess('You are now Logged in!');
 			}
 
 			
@@ -100,6 +100,8 @@ class AuthController extends \BaseController {
 		{
 		    echo 'User with this login already exists.';
 		}
+
+		return Redirect::to('/');
 	}
 
 	public function logout()

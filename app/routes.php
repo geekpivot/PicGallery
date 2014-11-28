@@ -24,8 +24,8 @@ Route::get('file', function()
 	return 'Done';
 });
 
+Route::get('login', ['as' => 'user.login', 'uses' => 'AuthController@authenticate']);
+Route::post('login', 'AuthController@login');
+Route::post('register', [ 'as' => 'user.register', 'uses' => 'AuthController@register']);
+Route::get('logout', 'AuthController@logout');
 
-Route::get('login', function()
-{
-	return View::make('sentry.login');
-});

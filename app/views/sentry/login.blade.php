@@ -6,7 +6,7 @@
 			<div class="col-sm-4 well">
 
 				<h2>Login</h2>
-				{{ Form::open()}}
+				{{ Form::open(array('route' => 'user.login'))}}
 					<div class="form-group">
 						
 						{{ Form::label('email', 'Email: ')}}
@@ -24,7 +24,7 @@
 			</div>
 			<div class="col-sm-4 col-sm-offset-2 well">
 				<h2>Register</h2>
-				{{ Form::open()}}
+				{{ Form::open(array('route' => 'user.register'))}}
 					<div class="form-group">
 						{{ Form::label('first_name', 'First Name: ')}}
 						{{ Form::text('first_name', '' , [ 'class' => 'form-control'])}}
