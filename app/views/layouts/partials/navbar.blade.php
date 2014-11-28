@@ -14,6 +14,14 @@
             <li class="#"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
+
+            @if (! Sentry::check()){
+            <li><a href="">Log In</a></li>
+            }
+
+            @else{
+            <li><a href="">Logout</a></li>
+            }
           </ul>
         </div><!--/.nav-collapse -->
       </div>
