@@ -13,8 +13,9 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('pages.index');
 });
+
 
 Route::get('file', function()
 {
@@ -23,4 +24,3 @@ Route::get('file', function()
 	return 'Done';
 });
 
-Route::resource('photo', 'FileController');
