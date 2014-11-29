@@ -44,9 +44,9 @@ return array(
 
         'awss3' => array(
             'driver'     => 'awss3',
-            'key'        => 'AKIAIGRYWNF7LBGNVLLQ',
-            'secret'     => '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',
-            'bucket'     => 'cartapp',
+            'key'        => '',
+            'secret'     => '',
+            'bucket'     => '',
             // 'region'     => 'your-region',
             // 'base_url'   => 'your-url',
             // 'options'    => array(),
