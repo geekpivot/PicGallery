@@ -24,6 +24,8 @@ Route::get('file', function()
 	return 'Done';
 });
 
+Route::resource('photo', 'FileController');
+
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthController@authenticate']);
 Route::post('login', 'AuthController@login');
 Route::post('register', [ 'as' => 'user.register', 'uses' => 'AuthController@register']);

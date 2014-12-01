@@ -12,7 +12,7 @@ class FileController extends \BaseController {
 		//
 
 
-		return View::make('pages.index');
+		return View::make('pages.upload');
 
 	}
 
@@ -35,9 +35,17 @@ class FileController extends \BaseController {
 	 */
 	public function store()
 	{
-		$file = Input::file('file');
-		$upload =  Flysystem::connection('local')->put('face.jpg', $file);
-		return 'Upload Complete';
+		$filename = 'tmp.pdf';
+
+		//First we need to locally store the file
+		Input::file('file')->move(__DIR__.'/../images/', $filename);
+
+		//We have to read the file in so we get the contents
+
+		$file = File::get(__DIR__.'/../images/'.$filename);
+
+		$upload =  Flysystem::connection('awss3')->put('resume.pdf', $file);
+		return 'Perfect';
 	}
 
 
