@@ -35,7 +35,7 @@ class FileController extends \BaseController {
 	 */
 	public function store()
 	{
-		$filename = 'tmp.pdf';
+		$filename = str_random(20) . '.' . Input::file('file')->guessExtension();
 
 		//First we need to locally store the file
 		Input::file('file')->move(__DIR__.'/../images/', $filename);
@@ -44,7 +44,7 @@ class FileController extends \BaseController {
 
 		$file = File::get(__DIR__.'/../images/'.$filename);
 
-		$upload =  Flysystem::connection('awss3')->put('resume.pdf', $file);
+		$upload =  Flysystem::put('resume.pdf', $file);
 		return 'Perfect';
 	}
 

@@ -9,6 +9,10 @@
 		"aws/aws-sdk-php": "~2.4",
 		"graham-campbell/flysystem": "~1.0",
 		"cartalyst/sentry": "2.1.*"
+
+	},
+	"require-dev": {
+    	"way/generators": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

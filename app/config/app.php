@@ -122,7 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'GrahamCampbell\Flysystem\FlysystemServiceProvider',
-		'Cartalyst\Sentry\SentryServiceProvider'
+		'Cartalyst\Sentry\SentryServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider'
 
 	),
 
