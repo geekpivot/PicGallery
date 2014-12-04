@@ -1,1 +1,12 @@
-/Users/jamescoonce/Desktop/laravel/PicGallery/app/views/photos/show.blade.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	{{ HTML::image('' . $imageurl . '')}}
+
+	
+</body>
+</html>

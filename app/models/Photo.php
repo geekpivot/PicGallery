@@ -14,7 +14,7 @@ class Photo extends \Eloquent {
 
 	public function user(){
 
-		return $this->hasMany('Photo');
+		return $this->belongsTo('Photo');
 	}
 
 }

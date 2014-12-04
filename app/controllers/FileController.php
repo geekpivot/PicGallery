@@ -1,3 +1,5 @@
+
+
 <?php
 
 class FileController extends \BaseController {
@@ -35,16 +37,31 @@ class FileController extends \BaseController {
 	 */
 	public function store()
 	{
+		$user = Sentry::getUser();
 		$filename = str_random(20) . '.' . Input::file('file')->guessExtension();
+		$description = Input::get('description');
+		$title = Input::get('title');
 
 		//First we need to locally store the file
 		Input::file('file')->move(__DIR__.'/../images/', $filename);
 
 		//We have to read the file in so we get the contents
 
-		$file = File::get(__DIR__.'/../images/'.$filename);
+		$file = File::get(__DIR__.'/../images/'. $filename);
 
-		$upload =  Flysystem::put('resume.pdf', $file);
+		$photo = new Photo([
+			'title' => $title,
+			'description' => $description,
+			
+			]);
+		//Store the path for the file.
+		$photo->path = '/images/'. $user->first_name . '/' . $filename;
+
+		//Upload the file to AWS
+		$upload =  Flysystem::connection('awss3')->put('/images/'. $user->first_name . '/' . $filename, $file);
+
+		$photo->user()->associate($user);
+		$photo->save();
 		return 'Perfect';
 	}
 

@@ -17,14 +17,10 @@ Route::get('/', function()
 });
 
 
-Route::get('file', function()
-{
-	$file =  Flysystem::connection('awss3')->put('test.txt', 'This is the text of my app');
 
-	return 'Done';
-});
 
-Route::resource('photo', 'FileController');
+Route::resource('upload', 'FileController');
+Route::resource('photos', 'PhotosController');
 
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthController@authenticate']);
 Route::post('login', 'AuthController@login');

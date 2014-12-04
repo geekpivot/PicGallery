@@ -1,5 +1,9 @@
 <?php
 
+use Aws\S3\S3Client;
+use League\Flysystem\Filesystem;
+use League\Flysystem\Adapter\AwsS3 as Adapter;
+
 class PhotosController extends \BaseController {
 
 	/**
@@ -51,9 +55,20 @@ class PhotosController extends \BaseController {
 	 */
 	public function show($id)
 	{
+
 		$photo = Photo::findOrFail($id);
 
-		return View::make('photos.show', compact('photo'));
+		$client = S3Client::factory(array(
+	    	'key'    => '*******',
+	    	'secret' => '*******',
+		));
+
+		$adapter = new Adapter($client, 'cartapp');
+		$filesystem = new Filesystem($adapter);
+
+		$imageurl = $filesystem->getAdapter()->getClient()->getObjectUrl('cartapp', $photo->path);
+
+		return View::make('photos.show', compact('photo'))->with('imageurl', $imageurl);
 	}
 
 	/**
