@@ -1,1 +1,6 @@
-/Users/jamescoonce/Desktop/laravel/PicGallery/app/views/photos/index.blade.php
+@extends('layouts.master')
+
+
+@section('content')
+
+@stop

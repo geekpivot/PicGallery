@@ -46,7 +46,7 @@ return array(
             'driver'     => 'awss3',
             'key'        => '',
             'secret'     => '',
-            'bucket'     => '',
+            'bucket'     => 'cartapp',
             // 'region'     => 'your-region',
             // 'base_url'   => 'your-url',
             // 'options'    => array(),

@@ -17,10 +17,11 @@ Route::get('/', function()
 });
 
 
+Route::group(array('before' => 'auth'), function(){
+	
+	Route::resource('photos', 'PhotosController');
+});
 
-
-Route::resource('upload', 'FileController');
-Route::resource('photos', 'PhotosController');
 
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthController@authenticate']);
 Route::post('login', 'AuthController@login');

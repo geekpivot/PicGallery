@@ -42,7 +42,31 @@ class PhotosController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		Photo::create($data);
+		$user = Sentry::getUser();
+		$filename = str_random(20) . '.' . Input::file('file')->guessExtension();
+		$description = Input::get('description');
+		$title = Input::get('title');
+
+		//First we need to locally store the file
+		Input::file('file')->move(__DIR__.'/../images/', $filename);
+
+		//We have to read the file in so we get the contents
+
+		$file = File::get(__DIR__.'/../images/'. $filename);
+
+		$photo = new Photo([
+			'title' => $title,
+			'description' => $description,
+			
+			]);
+		//Store the path for the file.
+		$photo->path = '/images/'. $user->first_name . '/' . $filename;
+
+		//Upload the file to AWS
+		$upload =  Flysystem::connection('awss3')->put('/images/'. $user->first_name . '/' . $filename, $file);
+
+		$photo->user()->associate($user);
+		$photo->save();
 
 		return Redirect::route('photos.index');
 	}
@@ -59,8 +83,8 @@ class PhotosController extends \BaseController {
 		$photo = Photo::findOrFail($id);
 
 		$client = S3Client::factory(array(
-	    	'key'    => '*******',
-	    	'secret' => '*******',
+	    	'key'    => '',
+	    	'secret' => '',
 		));
 
 		$adapter = new Adapter($client, 'cartapp');
@@ -68,7 +92,15 @@ class PhotosController extends \BaseController {
 
 		$imageurl = $filesystem->getAdapter()->getClient()->getObjectUrl('cartapp', $photo->path);
 
-		return View::make('photos.show', compact('photo'))->with('imageurl', $imageurl);
+		$data = [
+
+			'title' => $photo->title,
+			'description' => $photo->description,
+			'imageurl' => $imageurl
+
+		];
+
+		return View::make('photos.show', compact('photo'))->with($data);
 	}
 
 	/**

@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	{{ HTML::image('' . $imageurl . '')}}
+@extends('layouts.master')
 
+@section('content')
+
+	<h1>{{$title}}</h1>
+	{{ HTML::image('' . $imageurl . '')}}
+	<p>{{$description}}</p>
 	
-</body>
-</html>
+@stop
